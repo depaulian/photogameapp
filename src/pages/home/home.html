@@ -1,17 +1,96 @@
 <ion-header>
-  <ion-navbar>
+
+  <ion-navbar color="primary">
     <ion-title>Home</ion-title>
+    <ion-buttons  end >
+      <button ion-button icon-only (click)="settings()">
+          <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+<ion-content>
+    <ion-fab bottom right>
+        <button ion-fab color="danger" (click)="takePhoto()"><ion-icon name="camera"></ion-icon></button>
+      </ion-fab>
+    <ion-segment [(ngModel)]="category">
+        <ion-segment-button value="recent" (click)="getPhotos(1)">
+          RECENT
+        </ion-segment-button>
+              <ion-segment-button value="score" (click)="getPhotos(2)">
+          SCORE 
+        </ion-segment-button>
+        <ion-segment-button value="offline">
+          OFFLINE PHOTOS 
+        </ion-segment-button>
+      </ion-segment>
+  <ion-card (click)="viewPhoto(p)" *ngFor="let p of photos$ | async">
+    
+    <ion-item color="secondary">
+      <h2 style="color:#fff"><b>{{p.name}}</b></h2>
+      <p>Quantity - {{p.quantity}} </p>
+    </ion-item>
+  
+    <img src="assets/imgs/welcome.png">
+      <button ion-button item-right  small color="primary" style="margin-top:-30px; float:right;">
+        <ion-icon name="thumbs-down"></ion-icon>
+      </button>
+      <button ion-button item-right  small color="primary" style="margin-top:-30px; float:right;">
+        <ion-icon name="thumbs-up"></ion-icon>
+      </button>
+    <ion-card-content>
+      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+    </ion-card-content>
+  
+    <ion-row >
+      <ion-col >
+        <button ion-button icon-left  small color="primary">
+          <ion-icon name="eye"></ion-icon>
+          <div>{{p.views}} Views</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          {{p.posted_at}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  
+  </ion-card>
+  <ion-list *ngIf="category=='offline'">
+  <ion-card (click)="viewPhoto(p)"  *ngFor="let p of offline_photos">
+    <ion-item color="secondary">
+      <h2 style="color:#fff"><b>{{p.name}}</b></h2>
+      <p>Quantity - {{p.quantity}} </p>
+    </ion-item>
+  
+    <img src="assets/imgs/welcome.png">
+      <button ion-button item-right  small color="primary" style="margin-top:-30px; float:right;">
+        <ion-icon name="thumbs-down"></ion-icon>
+      </button>
+      <button ion-button item-right  small color="primary" style="margin-top:-30px; float:right;">
+        <ion-icon name="thumbs-up"></ion-icon>
+      </button>
+    <ion-card-content>
+      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+    </ion-card-content>
+  
+    <ion-row >
+      <ion-col >
+        <button ion-button icon-left  small color="primary">
+          <ion-icon name="eye"></ion-icon>
+          <div>{{p.views}} Views</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          {{p.posted_at}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  
+  </ion-card>
+  </ion-list>
 </ion-content>

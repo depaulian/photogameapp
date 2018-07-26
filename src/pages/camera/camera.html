@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Take Photo</ion-title>
+    <ion-buttons  end >
+      <button ion-button icon-only (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item class="image-holder">
+      <button ion-button item-right  small color="primary" class="create-icon" (click)='takePhoto()'>
+          <ion-icon name="create"></ion-icon>
+        </button>
+    <img [src]="image" class="logo-image"/>
+  </ion-item>
+  <form [formGroup]="cameraForm" (ngSubmit)="postphoto()">
+    <ion-list>
+           <ion-item class="last">
+             <ion-label stacked>Caption/Title</ion-label>
+             <ion-input type="text" formControlName="caption"></ion-input>
+           </ion-item>
+            <ion-item *ngIf="!cameraForm.controls.caption.value && (cameraForm.controls.caption.dirty || submitAttempt)">
+              <p class="invalid"> Please enter the caption </p>
+            </ion-item>
+  
+           <ion-item class="last">
+            <ion-label stacked>Description</ion-label>
+            <ion-textarea placeholder='How can we help' formControlName="description"></ion-textarea>
+           </ion-item>
+           
+           <ion-item class="last">
+            <ion-label stacked>Category</ion-label>
+            <ion-select  formControlName="category" placeholder="Select category of photo">
+              <ion-option *ngFor="let i of categories" [value]="i.id"> {{i.name}}</ion-option>
+            </ion-select>
+           </ion-item>
+           <ion-item class="last">
+            <ion-label stacked>Location</ion-label>
+            <ion-input type="text" formControlName="location"></ion-input>
+           </ion-item>
+    </ion-list>
+           <ion-buttons>
+             <button ion-button block color="secondary" type="submit" [disabled]="!cameraForm.valid">POST PHOTO</button>
+           </ion-buttons>
+  </form>
+</ion-content>

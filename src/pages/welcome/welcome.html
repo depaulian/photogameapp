@@ -1,0 +1,23 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title><img [src]="logoImage" width="150"/></ion-title>
+      <ion-buttons  end >
+        <button ion-button icon-only (click)="signIn()">
+            <ion-icon name="log-in"></ion-icon> Sign In
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <img [src]="welcomeImage"/>
+    <ion-card>
+        <h2>Be a winner.</h2>
+        <h3>Join the community of photo enthusiasts. Upload your photos and have them voted</h3>
+        <button ion-button block color="primary"(click)="signUp()">
+                JOIN FOR FREE
+            </button>
+        <h3>By joining PhotoGame, you agree to our <a>Terms of Service</a> and <a>Privacy Policy</a></h3>
+    </ion-card>
+  </ion-content>

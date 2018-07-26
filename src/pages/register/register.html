@@ -1,0 +1,57 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title><img [src]="logoImage" width="150"/></ion-title>
+    <ion-buttons  end >
+      <button ion-button icon-only (click)="signIn()">
+          <ion-icon name="log-in"></ion-icon> Sign In
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<h2>Sign up to start your free experience</h2>
+<h3>Just one single step and you're Done!<br/> We hate long processes, too.</h3>
+<h2>Create your account.</h2>
+<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+  <ion-list>
+         <ion-item class="last">
+           <ion-label stacked>Username</ion-label>
+           <ion-input type="text" formControlName="username"></ion-input>
+           <button ion-button type="button" clear item-right *ngIf="signUpForm.controls.username.pending"><ion-spinner name="bubbles"></ion-spinner></button>
+         </ion-item>
+          <ion-item *ngIf="!signUpForm.controls.username.value && !signUpForm.controls.username.pending && (signUpForm.controls.username.dirty || submitAttempt)">
+            <p class="invalid"> Please Enter a username </p>
+          </ion-item>
+
+          <ion-item *ngIf="signUpForm.controls.username.value && !signUpForm.controls.username.valid && !signUpForm.controls.username.pending && (signUpForm.controls.username.dirty || submitAttempt)">
+              <p class="invalid">Sorry, that username is already in use!</p>
+          </ion-item>
+
+         <ion-item class="last">
+          <ion-label stacked>Email Address</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+          <button ion-button type="button" clear item-right *ngIf="signUpForm.controls.email.pending"><ion-spinner name="bubbles"></ion-spinner></button>
+        </ion-item>
+        <ion-item *ngIf="!signUpForm.controls.email.value && !signUpForm.controls.email.pending && (signUpForm.controls.email.dirty || submitAttempt)">
+          <p class="invalid"> Please an Email Address </p>
+        </ion-item>
+        <ion-item *ngIf="signUpForm.controls.email.value && !signUpForm.controls.email.valid && !signUpForm.controls.email.pending && (signUpForm.controls.email.dirty || submitAttempt)">
+            <p class="invalid">Sorry, that Email address is already in use!</p>
+        </ion-item>
+         <ion-item class="last">
+           <ion-label stacked>Password</ion-label>
+           <ion-input type="{{password}}" formControlName="password"></ion-input>
+           <button ion-button type="button" clear (click)="togglePass()" item-right *ngIf="password=='password'"><ion-icon name="eye" item-right color="primary" style="font-size:20px;" ></ion-icon></button>
+           <button ion-button type="button" clear (click)="togglePass()" item-right *ngIf="password=='text'"><ion-icon name="eye-off" item-right color="primary" style="font-size:20px;" ></ion-icon></button>
+         </ion-item>
+         <ion-item *ngIf="signUpForm.controls.password.value && !signUpForm.controls.password.valid && (signUpForm.controls.password.dirty || submitAttempt)">
+          <p class="invalid">Paswsword stregth low (Min 6 characters)</p>
+      </ion-item>
+ </ion-list>
+         <ion-buttons>
+           <button ion-button block color="secondary" type="submit" [disabled]="!signUpForm.valid">GET STARTED</button>
+         </ion-buttons>
+</form>
+</ion-content>

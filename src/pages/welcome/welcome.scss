@@ -1,0 +1,24 @@
+page-welcome {
+ .card{
+     margin:0px!important;
+     width:100%!important;
+     height:100%;
+     background:color($colors,secondary);
+     border-radius:0px;
+     margin-top:-5px!important;
+     text-align: center;
+ }
+ .card h2 {
+     font-size:2.8em;
+     margin-top:20px;
+     color:color($colors,light)
+ }
+ .card h3 {
+    font-size:1.1em;
+    color:color($colors,light)
+ }
+ .card button {
+    width: calc(100% - 20px);
+    margin:40px auto!important;
+ }
+}

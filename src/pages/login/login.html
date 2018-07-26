@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title><img [src]="logoImage" width="150"/></ion-title>
+    <ion-buttons  end >
+      <button ion-button icon-only (click)="signUp()">
+          <ion-icon name="log-in"></ion-icon> Sign Up
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <h2>Log In your account.</h2>
+  <form [formGroup]="logInForm" (ngSubmit)="signIn()">
+    <ion-list>
+           <ion-item class="last">
+             <ion-label stacked>Username</ion-label>
+             <ion-input type="text" formControlName="username"></ion-input>
+           </ion-item>
+            <ion-item *ngIf="!logInForm.controls.username.valid && (logInForm.controls.username.dirty || submitAttempt)">
+              <p class="invalid"> Please enter a valid username </p>
+            </ion-item>
+           <ion-item class="last">
+             <ion-label stacked>Password</ion-label>
+             <ion-input type="{{password}}" formControlName="password"></ion-input>
+             <button ion-button type="button" clear (click)="togglePass()" item-right *ngIf="password=='password'"><ion-icon name="eye" item-right color="primary" style="font-size:20px;" ></ion-icon></button>
+             <button ion-button type="button" clear (click)="togglePass()" item-right *ngIf="password=='text'"><ion-icon name="eye-off" item-right color="primary" style="font-size:20px;" ></ion-icon></button>
+             
+           </ion-item>
+   </ion-list>
+           <ion-buttons>
+             <button ion-button block color="secondary" type="submit" [disabled]="!logInForm.valid">SIGN IN</button>
+           </ion-buttons>
+  </form>
+</ion-content>

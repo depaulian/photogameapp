@@ -2,6 +2,12 @@
   "name": "fen",
   "app_id": "",
   "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/v1",
+      "proxyUrl": "http://photogame.test/v1"
+    }
+  ],
   "integrations": {
     "cordova": {}
   }

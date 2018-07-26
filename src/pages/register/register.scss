@@ -1,0 +1,48 @@
+page-register {
+ h2 {
+     font-size:2.4rem;
+ }
+ h3{
+     font-size:1.8rem;
+     font-weight: 400;
+ }
+ .list-md .item-block .item-inner {
+    padding-top: 0px;
+    border-bottom: 0px;
+}
+.item-md.item-input .item-inner {
+    border-bottom-color: color($colors,primary);
+    box-shadow: inset 0 -1px 0 0 color($colors,primary);
+}
+  
+.item-md.item-input.last .item-inner{
+    border-bottom-color: #fff;
+    box-shadow: inset 0 -1px 0 0 #fff;
+}
+.item-md.item-input.last.has-focus .item-inner{
+    border-bottom-color: #fff;
+    box-shadow: inset 0 -1px 0 0 #fff;
+}
+.label[stacked] {
+    font-size: 1.4rem;
+}
+ion-buttons {
+    margin: 0;
+}
+.item-inner {
+    padding-right: 0;
+}
+
+.item {
+    margin-bottom: 5px;
+}
+.input-cover{
+    border: 1px solid  color($colors,secondary);
+}
+.item-input-has-focus .input-cover, input-has-focus .input-cover {
+ display: block;
+}
+.invalid {
+    color:color($colors,danger);
+}
+}

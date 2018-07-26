@@ -1,0 +1,47 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Photo Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ion-item color="secondary">
+      <h2 style="color:#fff"><b>{{photo.name}}</b></h2>
+      <p>Category - {{photo.quantity}} </p>
+    </ion-item>
+  
+    <img src="assets/imgs/welcome.png">
+      <ion-card-content>
+        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      </ion-card-content>
+
+      <ion-row >
+        <ion-col>
+          <ion-note>
+            {{photo.posted_at}}
+          </ion-note>
+        </ion-col>
+      </ion-row>
+    
+    </ion-card>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+            <button ion-button icon-left  small color="primary" (click)="confirmBuy()">
+              <ion-icon name="thumbs-down"></ion-icon>
+              <div>12</div>
+            </button>
+            <button ion-button icon-left  small color="primary" (click)="confirmBuy()">
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>1234</div>
+            </button>
+            <button ion-button icon-left  small color="secondary">
+              <ion-icon name="eye"></ion-icon>
+              <div>{{photo.views}} Views</div>
+            </button>
+    </ion-toolbar>
+  </ion-footer>
