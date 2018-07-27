@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserProvider } from '../../providers/user/user';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -14,12 +9,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  user;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider:UserProvider) {
+    this.user = this.userProvider.getUser();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+
   }
 
 }

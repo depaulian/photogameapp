@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Events } from 'ionic-angular';
 
  
 @Injectable()
 export class StorageService {
  
-  constructor(public storage:Storage ){
+  constructor(public storage:Storage, private ev:Events){
  
   }
  
@@ -36,7 +37,7 @@ export class StorageService {
                   val.photos = [];
                 }
                 val.photos.push(photo);
-                this.storage.set('photogameapp', {photos:val.photos});
+                this.storage.set('photogameapp', {user:val.user,photos:val.photos});
                 resolve(photo);
               }else{
                 reject('error');
@@ -51,10 +52,8 @@ export class StorageService {
       setTimeout(() => {
         this.storage.get('photogameapp').then(val => {
               if(val.photos){
-                console.log(val.photos)
                 resolve(val.photos);
               }else{
-                console.log('asdasdas')
                 reject('error');
               }   
           });

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { StorageService } from '../../services/storageService';
+import { UserProvider } from '../../providers/user/user';
 
 @IonicPage()
 @Component({
@@ -23,8 +24,8 @@ export class LoginPage {
               private alertCtrl: AlertController,
               public loading: LoadingController,
               private authProvider:AuthProvider,
-              private storageService:StorageService
-
+              private storageService:StorageService,
+              private userProvider:UserProvider
              ) {
     this.logoImage = 'assets/imgs/logo_greyscale.png'
     this.password   = "password";
@@ -53,6 +54,7 @@ export class LoginPage {
             loader.dismiss();
             if(data['status_code']==100){
               this.storageService.saveUserData(data);
+              this.userProvider.setUser(data['user']);
               this.navCtrl.setRoot('TabsPage');
             }else{
               loader.dismiss();

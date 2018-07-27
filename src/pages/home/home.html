@@ -3,8 +3,8 @@
   <ion-navbar color="primary">
     <ion-title>Home</ion-title>
     <ion-buttons  end >
-      <button ion-button icon-only (click)="settings()">
-          <ion-icon name="more"></ion-icon>
+      <button ion-button icon-only (click)="logout()">
+          <ion-icon name="logout"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -26,6 +26,7 @@
           OFFLINE PHOTOS 
         </ion-segment-button>
       </ion-segment>
+      <ion-list *ngIf="category=='recent'||category=='score'">
   <ion-card (click)="viewPhoto(p)" *ngFor="let p of photos$ | async">
     
     <ion-item color="secondary">
@@ -59,14 +60,15 @@
     </ion-row>
   
   </ion-card>
+  </ion-list>
   <ion-list *ngIf="category=='offline'">
-  <ion-card (click)="viewPhoto(p)"  *ngFor="let p of offline_photos">
+  <ion-card  *ngFor="let p of offline_photos">
     <ion-item color="secondary">
       <h2 style="color:#fff"><b>{{p.name}}</b></h2>
       <p>Quantity - {{p.quantity}} </p>
     </ion-item>
   
-    <img src="assets/imgs/welcome.png">
+    <img src="assets/imgs/welcome.png" (click)="viewPhoto(p)" >
       <button ion-button item-right  small color="primary" style="margin-top:-30px; float:right;">
         <ion-icon name="thumbs-down"></ion-icon>
       </button>
@@ -79,14 +81,21 @@
   
     <ion-row >
       <ion-col >
-        <button ion-button icon-left  small color="primary">
-          <ion-icon name="eye"></ion-icon>
-          <div>{{p.views}} Views</div>
+        <button *ngIf="p.upload_status==0" ion-button icon-left  small color="secondary" (click)="uploadPhoto(p)">
+          <ion-icon name="cloud-upload"></ion-icon>
+          <div>UPLOAD</div>
+        </button>
+        <button *ngIf="p.upload_status==1" ion-button icon-left  small color="light">
+          <div>UPLOADED</div>
+        </button>
+        <button *ngIf="p.upload_status==2" ion-button icon-left  small color="light">
+            <ion-spinner name="bubbles"></ion-spinner>
+          <div>UPLOADING</div>
         </button>
       </ion-col>
       <ion-col center text-center>
         <ion-note>
-          {{p.posted_at}}
+          {{p.timestamp | date:'medium'}}
         </ion-note>
       </ion-col>
     </ion-row>

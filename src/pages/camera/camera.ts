@@ -68,13 +68,14 @@ export class CameraPage {
 
   postphoto(){
     this.photo = [];
-    this.photo.category = this.cameraForm.value.category;
+    this.photo.caption = this.cameraForm.value.caption;
     this.photo.description = this.cameraForm.value.description;
     this.photo.category = this.cameraForm.value.category;
     this.photo.location = this.cameraForm.value.location;
-    this.photo.owner = this.userProvider.getUser();
+    this.photo.owner = this.userProvider.getUser().id;
     this.photo.timestamp = new Date();
     this.photo.image = this.image;
+    this.photo.upload_status = 0;
     this.storageService.savePhotoOffline(this.photo).then(
       (val)=>this.viewCtrl.dismiss(val),
       (err) => console.error(err)

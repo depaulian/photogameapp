@@ -6,6 +6,7 @@ import { UsernameValidator } from '../../validators/username';
 import { EmailValidator } from '../../validators/email';
 import { AuthProvider } from '../../providers/auth/auth';
 import { StorageService } from '../../services/storageService';
+import { UserProvider } from '../../providers/user/user';
 
 @IonicPage()
 @Component({
@@ -27,7 +28,8 @@ export class RegisterPage {
               private alertCtrl: AlertController,
               public loading: LoadingController,
               private authProvider:AuthProvider,
-              private storageService:StorageService
+              private storageService:StorageService,
+              private userProvider:UserProvider
             ) {
     this.logoImage  = 'assets/imgs/logo_greyscale.png';
     this.password   = "password";
@@ -97,6 +99,7 @@ export class RegisterPage {
             loader.dismiss();
             if(data['status_code']==100){
               this.storageService.saveUserData(data);
+              this.userProvider.setUser(data['user']);
               this.navCtrl.setRoot('TabsPage');
             }else{
               loader.dismiss();

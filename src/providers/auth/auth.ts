@@ -47,9 +47,17 @@ export class AuthProvider {
 
   postPhoto(data){
 
-    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json'})};
-    let body = { caption:data.caption,description:data.description,category:data.category,location:data.location};
-    return this.http.post(API_ENDPOINT + 'email',JSON.stringify(body), headers).pipe(map(res => res));
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json','Authorization':'Bearer ' + data.token})};
+    let body = { 
+                  caption:data.caption,
+                  description:data.description,
+                  category:data.category,
+                  location:data.location,
+                  owner:data.owner,
+                  time_taken:data.timestamp,
+                  photo:data.image,
+                };
+    return this.http.post(API_ENDPOINT + '/post-photo',JSON.stringify(body), headers).pipe(map(res => res));
     
   }
 
@@ -77,13 +85,9 @@ export class AuthProvider {
   }
 
   private requestPhotos(params) {
-    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json'})};
-    return this.http.get<PhotoResponse>(API_ENDPOINT+'/photo/?format=json', headers).pipe(
-      map(response => response.value)
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json','Authorization':'Bearer ' + params.token})};
+    return this.http.get<PhotoResponse>(API_ENDPOINT+'/photos?limit='+params.limit+'&offset='+params.offset+'&sorting='+params.sorting+'', headers).pipe(
+      map(response => response['result'])
     );
   }
-
-
-
-
 }
