@@ -13,6 +13,14 @@ export class StorageService {
   saveUserData(data) {
     this.storage.set('photogameapp',{user:data['user']});
   }
+  removeData(){
+    return new Promise((resolve) => {
+      this.storage.remove('photogameapp')
+      .then(()=> {
+          resolve()
+      });
+    });
+  }
 
   checkUserData(){
     return new Promise((resolve, reject) => {

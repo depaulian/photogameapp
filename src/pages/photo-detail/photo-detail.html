@@ -10,19 +10,20 @@
 <ion-content>
   <ion-card>
     <ion-item color="secondary">
-      <h2 style="color:#fff"><b>{{photo.name}}</b></h2>
-      <p>Category - {{photo.quantity}} </p>
+      <h2 style="color:#fff"><b>{{photo.caption}}</b></h2>
+      <p>Category - {{photo.category}} </p>
+      <p>Posted by - {{photo.username}} </p>
     </ion-item>
   
     <img src="assets/imgs/welcome.png">
       <ion-card-content>
-        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+        <p>{{photo.description}}</p>
       </ion-card-content>
 
       <ion-row >
         <ion-col>
           <ion-note>
-            {{photo.posted_at}}
+            {{photo.time_taken}}
           </ion-note>
         </ion-col>
       </ion-row>
@@ -31,17 +32,21 @@
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-            <button ion-button icon-left  small color="primary" (click)="confirmBuy()">
+            <button ion-button icon-left  small color="primary" (click)="votePhoto(photo,-1)">
               <ion-icon name="thumbs-down"></ion-icon>
-              <div>12</div>
+              <div>{{photo.vote_down}}</div>
             </button>
-            <button ion-button icon-left  small color="primary" (click)="confirmBuy()">
+            <button ion-button icon-left  small color="primary" (click)="votePhoto(photo,1)">
               <ion-icon name="thumbs-up"></ion-icon>
-              <div>1234</div>
+              <div>{{photo.vote_up}}</div>
             </button>
             <button ion-button icon-left  small color="secondary">
               <ion-icon name="eye"></ion-icon>
               <div>{{photo.views}} Views</div>
+            </button>
+            <button ion-button icon-left  small color="secondary">
+              <ion-icon name="flash"></ion-icon>
+              <div>{{photo.vote_score | number : '1.2-2' }} Vote Score</div>
             </button>
     </ion-toolbar>
   </ion-footer>

@@ -8,7 +8,7 @@ import { timer } from 'rxjs/observable/timer';
 
 const API_ENDPOINT = '/v1';
 const CACHE_SIZE = 1;
-const REFRESH_INTERVAL = 10000;
+const REFRESH_INTERVAL = 30000;
 
 @Injectable()
 export class AuthProvider {
@@ -46,7 +46,6 @@ export class AuthProvider {
   }
 
   postPhoto(data){
-
     let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json','Authorization':'Bearer ' + data.token})};
     let body = { 
                   caption:data.caption,
@@ -61,6 +60,16 @@ export class AuthProvider {
     
   }
 
+  postVote(data){
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json','Authorization':'Bearer ' + data.token})};
+    let body = { user_id:data.user_id, vote:data.vote,photo_id:data.photo_id };
+    return this.http.post(API_ENDPOINT + '/vote-photo',JSON.stringify(body), headers).pipe(map(res => res));
+  }
+  postView(data){
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json','Authorization':'Bearer ' + data.token})};
+    let body = { user_id:data.user_id, photo_id:data.photo_id };
+    return this.http.post(API_ENDPOINT + '/view-photo',JSON.stringify(body), headers).pipe(map(res => res));
+  }
 
   photos(params) {
     if (!this.cache$) {
@@ -75,13 +84,16 @@ export class AuthProvider {
 
     return this.cache$;
   }
-  forceReload() {
-    // Calling next will complete the current cache instance
-    this.reload$.next();
 
-    // Setting the cache to null will create a new cache the
-    // next time 'jokes' is called
+  forceReload(params) {
     this.cache$ = null;
+    const timer$ = timer(0, REFRESH_INTERVAL);
+    this.cache$ = timer$.pipe(
+      switchMap(() => this.requestPhotos(params)),
+      takeUntil(this.reload$),
+      shareReplay(CACHE_SIZE)
+    );
+    return this.cache$;
   }
 
   private requestPhotos(params) {

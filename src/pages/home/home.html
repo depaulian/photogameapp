@@ -3,8 +3,8 @@
   <ion-navbar color="primary">
     <ion-title>Home</ion-title>
     <ion-buttons  end >
-      <button ion-button icon-only (click)="logout()">
-          <ion-icon name="logout"></ion-icon>
+      <button ion-button icon-only (click)="promptLogout()">
+          <ion-icon name="log-out"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -27,22 +27,23 @@
         </ion-segment-button>
       </ion-segment>
       <ion-list *ngIf="category=='recent'||category=='score'">
-  <ion-card (click)="viewPhoto(p)" *ngFor="let p of photos$ | async">
+  <ion-card  *ngFor="let p of photos$ | async">
     
     <ion-item color="secondary">
-      <h2 style="color:#fff"><b>{{p.name}}</b></h2>
-      <p>Quantity - {{p.quantity}} </p>
+      <h2 style="color:#fff"><b>{{p.caption}}</b></h2>
+      <p>{{p.location}} </p>
+      <p>Posted by {{p.username}} </p>
     </ion-item>
   
-    <img src="assets/imgs/welcome.png">
-      <button ion-button item-right  small color="primary" style="margin-top:-30px; float:right;">
-        <ion-icon name="thumbs-down"></ion-icon>
+    <img src="assets/imgs/welcome.png" (click)="viewPhoto(p)">
+      <button ion-button item-right  small color="primary" class="vote-button" (click)="votePhoto(p,-1)">
+         <ion-icon name="thumbs-down"></ion-icon> <span class="vote-count">{{p.vote_down}}</span>
       </button>
-      <button ion-button item-right  small color="primary" style="margin-top:-30px; float:right;">
-        <ion-icon name="thumbs-up"></ion-icon>
+      <button ion-button item-right  small color="primary" class="vote-button" (click)="votePhoto(p,1)">
+         <ion-icon name="thumbs-up"></ion-icon> <span class="vote-count">{{p.vote_up}}</span>
       </button>
     <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      <p>{{p.description}}</p>
     </ion-card-content>
   
     <ion-row >
@@ -51,10 +52,15 @@
           <ion-icon name="eye"></ion-icon>
           <div>{{p.views}} Views</div>
         </button>
+        <button ion-button icon-left  small color="secondary">
+          <ion-icon name="flash"></ion-icon>
+          <div>{{p.vote_score | number : '1.2-2' }} Vote Score</div>
+        </button>
       </ion-col>
+      
       <ion-col center text-center>
         <ion-note>
-          {{p.posted_at}}
+          {{p.time_taken}}
         </ion-note>
       </ion-col>
     </ion-row>
