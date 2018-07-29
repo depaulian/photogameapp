@@ -1,4 +1,4 @@
-import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map, shareReplay, switchMap, takeUntil} from 'rxjs/operators';
@@ -6,7 +6,7 @@ import { Photo, PhotoResponse } from '../../models/photo/photo';
 import { Subject } from 'rxjs/Subject';
 import { timer } from 'rxjs/observable/timer';
 
-const API_ENDPOINT = '/v1';
+const API_ENDPOINT = 'http://photogame.test/v1';
 const CACHE_SIZE = 1;
 const REFRESH_INTERVAL = 30000;
 
@@ -95,8 +95,8 @@ export class AuthProvider {
     );
     return this.cache$;
   }
-  
-  clearCache(params) {
+
+  clearCache() {
     this.cache$ = null;
   }
 

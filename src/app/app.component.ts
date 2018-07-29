@@ -21,15 +21,18 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need
+      statusBar.styleDefault();
       storageService.checkUserData().then(
         (val) => {
                   this.rootPage = 'TabsPage',
                   userProvider.setUser(val);
+                  splashScreen.hide();
                  },
-        (err) => this.rootPage = 'WelcomePage',
+        (err) => {
+                  this.rootPage = 'WelcomePage'
+                  splashScreen.hide();
+                },
       )
-      statusBar.styleDefault();
-      splashScreen.hide();
     });
   }
 }

@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 import { App, IonicPage, NavController, NavParams, ModalController, Events, ToastController, AlertController } from 'ionic-angular';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { Photo } from '../../models/photo/photo';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 import { AuthProvider } from '../../providers/auth/auth';
 import { StorageService } from '../../services/storageService';
 import { UserProvider } from '../../providers/user/user';
-import 'rxjs/add/observable/empty'
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -23,7 +20,6 @@ export class HomePage {
   constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
-              private camera: Camera,
               private modalCtrl: ModalController,
               private authProvider: AuthProvider,
               private storageService: StorageService,

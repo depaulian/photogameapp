@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage,ViewController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Photo } from '../../models/photo/photo';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { StorageService } from '../../services/storageService';
 import { UserProvider } from '../../providers/user/user';

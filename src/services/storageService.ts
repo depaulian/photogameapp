@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Events } from 'ionic-angular';
 
  
 @Injectable()
 export class StorageService {
  
-  constructor(public storage:Storage, private ev:Events){
+  constructor(public storage:Storage){
  
   }
  
@@ -24,7 +23,6 @@ export class StorageService {
 
   checkUserData(){
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
         this.storage.get('photogameapp').then(val => {
               if(val){
                 resolve(val.user);
@@ -32,13 +30,11 @@ export class StorageService {
                 reject('error');
               }   
           });
-      }, 1000);
     });
   }
 
   savePhotoOffline(photo){
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
         this.storage.get('photogameapp').then(val => {
               if(val){
                 if(!val.photos){
@@ -51,13 +47,11 @@ export class StorageService {
                 reject('error');
               }   
           });
-      }, 1000);
     });
   }
 
   getOfflinePhotos(){
     return new Promise<any[]>((resolve, reject) => {
-      setTimeout(() => {
         this.storage.get('photogameapp').then(val => {
               if(val.photos){
                 resolve(val.photos);
@@ -65,7 +59,6 @@ export class StorageService {
                 reject('error');
               }   
           });
-      }, 1000);
     });
   }
  

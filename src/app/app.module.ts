@@ -8,8 +8,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UsernameValidator } from '../validators/username';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { CameraMock } from '@ionic-native-mocks/camera';
+import { Camera } from '@ionic-native/camera';
 import { CacheModule } from 'ionic-cache-observable';
 
 //validators
@@ -46,7 +45,6 @@ import { UserProvider } from '../providers/user/user';
     EmailValidator,
     StorageService,
     Camera,
-    { provide: Camera, useClass: CameraMock },
     UserProvider
   ]
 })
