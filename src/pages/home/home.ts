@@ -172,7 +172,7 @@ export class HomePage {
   logout(){
     this.storageService.removeData().then(
       (val)=>{
-              this.authProvider.photos;
+              this.authProvider.clearCache();
               this.app.getRootNav().setRoot('WelcomePage');
              },
       (err)=>{const toast = this.toast.create({

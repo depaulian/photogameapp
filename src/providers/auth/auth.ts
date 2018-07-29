@@ -95,6 +95,10 @@ export class AuthProvider {
     );
     return this.cache$;
   }
+  
+  clearCache(params) {
+    this.cache$ = null;
+  }
 
   private requestPhotos(params) {
     let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json','Authorization':'Bearer ' + params.token})};

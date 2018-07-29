@@ -32,11 +32,11 @@
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-            <button ion-button icon-left  small color="primary" (click)="votePhoto(photo,-1)">
+            <button ion-button icon-left  small color="primary" *ngIf='user.id!=photo.owner_id' (click)="votePhoto(photo,-1)">
               <ion-icon name="thumbs-down"></ion-icon>
               <div>{{photo.vote_down}}</div>
             </button>
-            <button ion-button icon-left  small color="primary" (click)="votePhoto(photo,1)">
+            <button ion-button icon-left  small color="primary" *ngIf='user.id!=photo.owner_id' (click)="votePhoto(photo,1)">
               <ion-icon name="thumbs-up"></ion-icon>
               <div>{{photo.vote_up}}</div>
             </button>

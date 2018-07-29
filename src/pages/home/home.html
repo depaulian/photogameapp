@@ -35,11 +35,11 @@
       <p>Posted by {{p.username}} </p>
     </ion-item>
   
-    <img src="assets/imgs/welcome.png" (click)="viewPhoto(p)">
-      <button ion-button item-right  small color="primary" class="vote-button" (click)="votePhoto(p,-1)">
+    <img [src]="p.photo" (click)="viewPhoto(p)">
+      <button ion-button item-right  small color="primary" *ngIf='user.id!=p.owner_id' class="vote-button" (click)="votePhoto(p,-1)">
          <ion-icon name="thumbs-down"></ion-icon> <span class="vote-count">{{p.vote_down}}</span>
       </button>
-      <button ion-button item-right  small color="primary" class="vote-button" (click)="votePhoto(p,1)">
+      <button ion-button item-right  small color="primary" *ngIf='user.id!=p.owner_id' class="vote-button" (click)="votePhoto(p,1)">
          <ion-icon name="thumbs-up"></ion-icon> <span class="vote-count">{{p.vote_up}}</span>
       </button>
     <ion-card-content>
@@ -70,19 +70,14 @@
   <ion-list *ngIf="category=='offline'">
   <ion-card  *ngFor="let p of offline_photos">
     <ion-item color="secondary">
-      <h2 style="color:#fff"><b>{{p.name}}</b></h2>
-      <p>Quantity - {{p.quantity}} </p>
+      <h2 style="color:#fff"><b>{{p.caption}}</b></h2>
+      <p>Posted by {{user.username}} </p>
+      <p>{{p.location}} </p>
     </ion-item>
   
-    <img src="assets/imgs/welcome.png" (click)="viewPhoto(p)" >
-      <button ion-button item-right  small color="primary" style="margin-top:-30px; float:right;">
-        <ion-icon name="thumbs-down"></ion-icon>
-      </button>
-      <button ion-button item-right  small color="primary" style="margin-top:-30px; float:right;">
-        <ion-icon name="thumbs-up"></ion-icon>
-      </button>
+    <img src="p.photo">
     <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      <p>{{p.description}}</p>
     </ion-card-content>
   
     <ion-row >

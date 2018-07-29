@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, App, ToastController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { StorageService } from '../../services/storageService';
+import { AuthProvider } from '../../providers/auth/auth';
 
 
 @IonicPage()
@@ -18,7 +19,8 @@ export class ProfilePage {
               private alertCtrl:AlertController,
               private storageService:StorageService,
               private app: App,
-              private toast: ToastController
+              private toast: ToastController,
+              private authProvider: AuthProvider,
             ) {
     this.user = this.userProvider.getUser();
   }
@@ -46,7 +48,10 @@ export class ProfilePage {
   }
   logout(){
     this.storageService.removeData().then(
-      (val)=>this.navCtrl.setRoot('WelcomePage'),
+      (val)=>{
+              this.authProvider.clearCache();
+              this.app.getRootNav().setRoot('WelcomePage');
+             },
       (err)=>{const toast = this.toast.create({
         message: 'Could not log you out ',
         duration: 3000
