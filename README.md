@@ -21,3 +21,7 @@ The app performs HTTP requests through the HttpClient that comes with the HttpCl
 - rxjs (map, shareReplay, switchMap, takeUntil, Subject, timer) to perform caching and manipulation of http responses
 - HttpClient to perform http requests
 - ionic storage to store data 
+
+## App Testing
+-update ionic-config.json and replace the proxy url value in the proxies object with that of the backend service
+-When testing the app in the browser replace the apiURL in the AuthProvider with the value of the path key from ionic-config.json
